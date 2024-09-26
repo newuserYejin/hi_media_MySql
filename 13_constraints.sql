@@ -91,8 +91,37 @@ describe user_foreignkey1;
 
 select * from user_foreignkey1;
 
+drop table if exists user_foreignkey2;
+create table if not exists user_foreignkey2(
+	user_no int auto_increment primary key,
+    user_name varchar(30) not null,
+    gender varchar(3) check(gender in ('남','여')),
+    age int check(age > 19)
+) engine = InnoDB;
+
+insert into user_foreignkey2
+values
+(null, '호','남',42),
+(null, '호호','여',21),
+(null, '호호호','남',22);
+
+select * from user_foreignkey2;
 
 
+-- defualt
+drop table if exists tb1_contry;
+create table if not exists tb1_contry(
+	contry_code int auto_increment primary key,
+    contry_name varchar(255) default '한국',
+    populateion varchar(255) default '0명',
+    add_time datetime default(current_time()),
+    add_day date default(current_date())
+) engine = InnoDB;
+
+insert into tb1_contry values();
+insert into tb1_contry values(null,'일본',default,default,default);
+
+select * from tb1_contry;
 
 
 
