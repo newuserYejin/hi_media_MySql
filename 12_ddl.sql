@@ -73,9 +73,44 @@ create table if not exists tb3(
     check(col1 in ('Y','N'))		-- 제약조건 확인 명시자 check 
 ) engine=InnoDB;
 
-drop table tb3 cascade;
+drop table if exists tb3;
 
+create table if not exists tb4(
+	PK int auto_increment primary key,
+    fk int,
+    col1 varchar(255),
+    check(col1 in ('Y','N'))		-- 제약조건 확인 명시자 check 
+) engine=InnoDB;
 
+create table if not exists tb5(
+	PK int auto_increment primary key,
+    fk int,
+    col1 varchar(255),
+    check(col1 in ('Y','N'))		-- 제약조건 확인 명시자 check 
+) engine=InnoDB;
+
+drop table if exists tb4,tb5;
+
+-- truncate : 테이블 drop 후 다시 마늘어 초기화한것과 같은 효과 (delete와는 다르다.)
+
+create table if not exists tb6(
+	PK int auto_increment primary key,
+    fk int,
+    col1 varchar(255),
+    check(col1 in ('Y','N'))		-- 제약조건 확인 명시자 check 
+) engine=InnoDB;
+
+insert into tb6 values(null,20,'Y');
+insert into tb6 values(null,20,'Y');
+insert into tb6 values(null,20,'Y');
+insert into tb6 values(null,20,'Y');
+insert into tb6 values(null,20,'Y');
+
+select * from tb6;
+
+truncate table tb6;
+
+select * from tb6;
 
 
 
